@@ -6145,9 +6145,9 @@ osenv@0, osenv@^0.1.4:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
 
-ouisys-clients@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/ouisys-clients/-/ouisys-clients-0.0.8.tgz#ce009db73722bca6e8d5417d4d1169c357b8137c"
+ouisys-clients@^0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/ouisys-clients/-/ouisys-clients-0.0.9.tgz#f5d2a80dae1404d3958d9cfdddf75c525423dfab"
   dependencies:
     ramda "^0.26.1"
     react "^16.6.3"

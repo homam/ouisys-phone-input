@@ -15,7 +15,7 @@ declare module "libphonenumber-js" {
   }
 }
 
-const country = process.env.country || "xx";
+const country = process.env.REACT_APP_COUNTRY || "xx";
 
 type IPropsChange = {
   msisdn: string,
