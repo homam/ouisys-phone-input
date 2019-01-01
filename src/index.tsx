@@ -4,17 +4,18 @@ import HOC, {
   initialState,
   match,
   MOLink,
-  mockMSISDNEntrySuccessState
+  mockMSISDNEntrySuccessState,
+  HOCProps
 } from "ouisys-clients/dist/clients/assrock-mo/HOC";
 import * as RDS from "ouisys-clients/dist/common-types/RemoteDataState";
-import MSISDNEntry from "./MSISDNEntry.tsx";
+import MSISDNEntry from "./MSISDNEntry";
 import mkTracker from "ouisys-clients/dist/pacman/record";
-import SendMO from "./SendMO.tsx";
+import SendMO from "./SendMO";
 
 import "./styles.scss";
 
 const tracker = mkTracker(
-  typeof window != "undefined" ? window : null,
+  typeof window != "undefined" ? window : (null as any),
   "xx",
   "test" //TODO: replace Unknown with your page's name
 );
@@ -29,7 +30,7 @@ const visitor = {
   offer: 1419
 };
 
-class MyRoot extends React.PureComponent {
+class MyRoot extends React.PureComponent<HOCProps> {
   state = {
     nationalNumber: "###",
     msisdn: null
@@ -45,7 +46,7 @@ class MyRoot extends React.PureComponent {
                 currentState={rds}
                 onSubmit={({ bupperNumber, nationalNumber, msisdn }) => {
                   this.setState({ nationalNumber, msisdn });
-                  this.props.actions.submitMSISDN(window, null, bupperNumber);
+                  this.props.actions.submitMSISDN(window, null as any, bupperNumber);
                 }}
               />
             );

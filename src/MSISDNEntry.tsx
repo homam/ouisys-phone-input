@@ -2,14 +2,18 @@ import React from "react";
 import * as RDS from "ouisys-clients/dist/common-types/RemoteDataState";
 import PhoneInput, { commonPrefix } from "./common/PhoneInput";
 import "./MSISDNEntry.scss";
-import checkmarkAudio from "./checkmark.m4a";
 import { ReactComponent as LoadingIcon } from "./Loading.svg";
 
 const okAudio = new Audio(
-  checkmarkAudio
+  process.env.PUBLIC_URL + "/checkmark.m4a"
   // "https://sounds.pond5.com/quiz-correct-sound-effect-049974748_prev.m4a"
 );
-export default class MSISDNEntry extends React.PureComponent {
+export interface IProps {
+  msisdn: string | null;
+  currentState: any
+  onSubmit: any
+}
+export default class MSISDNEntry extends React.PureComponent<IProps> {
   state = {
     msisdn: this.props.msisdn || commonPrefix,
     nationalNumber: "",

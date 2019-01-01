@@ -9,4 +9,4 @@ const configs = {
   ae: mkConfig("971", "05", 10)
 };
 
-export default configs[process.env.country];
+export default configs[process.env.country || "xx"];

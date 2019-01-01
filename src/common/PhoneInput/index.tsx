@@ -1,4 +1,4 @@
-import PhoneInput from "./PhoneInput.tsx";
+import PhoneInput from "./PhoneInput";
 export default PhoneInput;
 
 import config from "./config";

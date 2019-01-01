@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default function DigitOnlyInput({ inputRef, ...props }) {
+export default function DigitOnlyInput({ inputRef, ...props } : any) {
   return (
     <input
       {...props}

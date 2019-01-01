@@ -1,7 +1,7 @@
 import * as React from "react";
 import BasicInput from "react-phone-number-input/basic-input";
 import { isValidPhoneNumber } from "react-phone-number-input";
-import { parsePhoneNumber } from "libphonenumber-js";
+import { parsePhoneNumber, CountryCode } from "libphonenumber-js";
 import config from "./config";
 const { countryCode, commonPrefix, maxLength } = config;
 import { ReactComponent as Checkmark } from "./checkmark.svg";
@@ -9,25 +9,39 @@ import { ReactComponent as Errormark } from "./errormark.svg";
 import "./PhoneInput.scss";
 import "./checkmark.scss";
 
-const country = process.env.country;
+declare module "libphonenumber-js" {
+  export interface PhoneNumber {
+      metadata: any;
+  }
+}
+
+const country = process.env.country || "xx";
+
+type IPropsChange = {
+  msisdn: string,
+  isValid: boolean,
+  nationalNumber: string,
+  internationalNumber: string,
+  bupperNumber: string
+}
 
 interface IProps {
-  maxLength: number;
+  maxLength?: number;
   msisdn?: string;
   placeholder: string;
-  onChange: (msisdn: string) => void;
-  showCountryCode: boolean;
-  showFlag: boolean;
-  showMobileIcon: boolean;
+  onChange: (args: IPropsChange) => void;
+  showCountryCode?: boolean;
+  showFlag?: boolean;
+  showMobileIcon?: boolean;
   showError: boolean;
 }
 
 function parseMSISDN(msisdn: string) {
   try {
-    const parsedPhoneNumber = parsePhoneNumber(msisdn, country.toUpperCase());
+    const parsedPhoneNumber = parsePhoneNumber(msisdn, country.toUpperCase() as CountryCode);
     const nationalNumber = parsedPhoneNumber.formatNational();
     const internationalNumber = parsedPhoneNumber.formatInternational();
-    const bupperNumber = getBupperNimber(nationalNumber);
+    const bupperNumber = getBupperNumber(nationalNumber);
     const isValid = isValidPhoneNumber(msisdn, country.toUpperCase());
     const internationalPrefix =
       parsedPhoneNumber.metadata.countries[country.toUpperCase()][0];
@@ -49,7 +63,7 @@ function parseMSISDN(msisdn: string) {
   }
 }
 
-function getBupperNimber(nationalNumber) {
+function getBupperNumber(nationalNumber) {
   if (!nationalNumber || nationalNumber.length == 0) {
     return nationalNumber;
   } else {
@@ -71,10 +85,10 @@ export default class MsisdnComponent extends React.Component<IProps> {
   focusOnInputElement(ev) {
     const inputElement = this.inputElement;
     setTimeout(() => {
-      if (!!inputElement) {
-        inputElement.focus();
+      if (inputElement != null) {
+        (inputElement as any).focus();
       }
-    }, 10);
+    }, 20);
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.showError != prevProps.showError) {

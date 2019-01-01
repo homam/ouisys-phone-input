@@ -21,8 +21,10 @@ export default function SendMO({
       <div className="shortcode">{keywordAndShortcode.shortcode}</div>
       by SMS. Or{" "}
       <MOLink className="button" keywordAndShortcode={keywordAndShortcode}>
-        <SMSIcon className="icon" />
-        <div>Click Here!</div>
+        <div>
+          <SMSIcon className="icon" />
+          <div>Click Here!</div>
+        </div>
       </MOLink>
       <div className="change-your-mobile-number">
         Is {nationalNumber} not your mobile number?&nbsp;
