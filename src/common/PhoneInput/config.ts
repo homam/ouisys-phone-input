@@ -6,7 +6,8 @@ const configs = {
   mx: mkConfig("52", "01", 10),
   my: mkConfig("60", "01", 9),
   za: mkConfig("27", "0", 9),
-  ae: mkConfig("971", "05", 10)
+  ae: mkConfig("971", "05", 10),
+  xx: mkConfig("", "", 10)
 };
 
-export default configs[process.env.REACT_APP_COUNTRY || "xx"];
+export default (countryCode : string) => configs[countryCode] || configs.xx;

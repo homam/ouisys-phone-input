@@ -1,8 +1,9 @@
 import React from "react";
 import * as RDS from "ouisys-clients/dist/common-types/RemoteDataState";
-import PhoneInput, { commonPrefix } from "./common/PhoneInput";
+import PhoneInput, { getConfig } from "./common/PhoneInput";
 import "./MSISDNEntry.scss";
 import { ReactComponent as LoadingIcon } from "./Loading.svg";
+const COUNTRY = process.env.REACT_APP_COUNTRY || process.env.country || "xx";
 
 const okAudio = new Audio(
   process.env.PUBLIC_URL + "/checkmark.m4a"
@@ -13,6 +14,9 @@ export interface IProps {
   currentState: any
   onSubmit: any
 }
+
+const { commonPrefix } = getConfig(COUNTRY)
+
 export default class MSISDNEntry extends React.PureComponent<IProps> {
   state = {
     msisdn: this.props.msisdn || commonPrefix,
@@ -26,6 +30,7 @@ export default class MSISDNEntry extends React.PureComponent<IProps> {
       <div className="MSISDNEntry">
         <div className="info">Enter your mobile number to start:</div>
         <PhoneInput
+          countryCode={COUNTRY}
           placeholder="Phone number"
           msisdn={this.state.msisdn}
           onChange={({

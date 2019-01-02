@@ -2,8 +2,7 @@ import * as React from "react";
 import BasicInput from "react-phone-number-input/basic-input";
 import { isValidPhoneNumber } from "react-phone-number-input";
 import { parsePhoneNumber, CountryCode } from "libphonenumber-js";
-import config from "./config";
-const { countryCode, commonPrefix, maxLength } = config;
+import getConfig from "./config";
 import { ReactComponent as Checkmark } from "./checkmark.svg";
 import { ReactComponent as Errormark } from "./errormark.svg";
 import "./PhoneInput.scss";
@@ -15,7 +14,8 @@ declare module "libphonenumber-js" {
   }
 }
 
-const country = process.env.REACT_APP_COUNTRY || "xx";
+// const country = process.env.REACT_APP_COUNTRY || process.env.country || "xx";
+// const { countryCode, commonPrefix, maxLength }  = getConfig(country)
 
 type IPropsChange = {
   msisdn: string,
@@ -26,7 +26,7 @@ type IPropsChange = {
 }
 
 interface IProps {
-  maxLength?: number;
+  countryCode: string;
   msisdn?: string;
   placeholder: string;
   onChange: (args: IPropsChange) => void;
@@ -36,7 +36,7 @@ interface IProps {
   showError: boolean;
 }
 
-function parseMSISDN(msisdn: string) {
+function parseMSISDN(country: string, msisdn: string) {
   try {
     const parsedPhoneNumber = parsePhoneNumber(msisdn, country.toUpperCase() as CountryCode);
     const nationalNumber = parsedPhoneNumber.formatNational();
@@ -96,6 +96,8 @@ export default class MsisdnComponent extends React.Component<IProps> {
     }
   }
   render() {
+    const country =  this.props.countryCode
+    const { countryCode, commonPrefix, maxLength }  = getConfig(country)
     const focusOnInputElement = this.focusOnInputElement.bind(this);
     const showCountryCode =
       typeof this.props.showCountryCode == "boolean"
@@ -149,7 +151,7 @@ export default class MsisdnComponent extends React.Component<IProps> {
                 bupperNumber,
                 isValid,
                 internationalPrefix
-              } = parseMSISDN(msisdn);
+              } = parseMSISDN(country, msisdn);
               if (
                 !isValid &&
                 !!nationalNumber &&
