@@ -7,6 +7,8 @@ const configs = {
   my: mkConfig("60", "01", 9),
   za: mkConfig("27", "0", 9),
   ae: mkConfig("971", "05", 10),
+  gr: mkConfig("30", "69", 9),
+  ee: mkConfig("372", "", 10),
   xx: mkConfig("", "", 10)
 };
 
