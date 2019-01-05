@@ -1,0 +1,21 @@
+.SendMO {
+  a[href] {
+    position: relative;
+    .icon {
+      display: block;
+      width: 47px;
+      height: 47px;
+      position: absolute;
+      top: 0;
+      left: 1em;
+      svg,
+      * {
+        fill: white;
+      }
+    }
+  }
+
+  .change-your-mobile-number {
+    margin-top: 1.5em;
+  }
+}

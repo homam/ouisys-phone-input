@@ -1,0 +1,16 @@
+.MSISDNEntry {
+  button {
+    margin-top: 0.5em;
+  }
+  .info {
+    margin-bottom: 0.5em;
+  }
+  .errors {
+    margin-top: 1em;
+  }
+  .loading-icon {
+    width: 35px;
+    height: 50px;
+    transform: scale(2);
+  }
+}

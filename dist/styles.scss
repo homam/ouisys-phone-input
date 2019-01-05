@@ -1,0 +1,54 @@
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+%input {
+  box-shadow: 6px 6px 6px #999;
+}
+
+.button {
+  @extend %input;
+  width: 80%;
+  text-align: center;
+  height: 50px;
+  margin: auto;
+  border: solid 1px green;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#00f87f, #089433);
+  color: white;
+  text-decoration: none;
+  font-size: 1.3em;
+  text-shadow: 2px 3px 14px rgba(0, 0, 0, 0.68);
+  border-bottom: 4px solid #02751a;
+  transition: 0.3s;
+  &:active {
+    box-shadow: 2px 2px 2px #777;
+    border-bottom: 1px solid #02751a;
+    transform: translateY(3px);
+  }
+  &[disabled] {
+    opacity: 0.5;
+    background: linear-gradient(#089433, #00f87f);
+    color: silver;
+    border-bottom: 0;
+  }
+}
+
+.phone-input {
+  @extend %input;
+  width: 80%;
+  input {
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+}
